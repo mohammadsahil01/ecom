@@ -97,11 +97,16 @@ const router = createBrowserRouter([
 function App() {
   const dispatch = useDispatch()
   const user  = useSelector(selectLoggedUser)
-const userchecked = useSelector(selectUserChecked)
+  const userchecked = useSelector(selectUserChecked)
+
+ 
+
   useEffect(()=>{
-    if(!user){
-    dispatch(checkAuthAsync())}
+    dispatch(checkAuthAsync())
   },[dispatch])
+
+  
+
   useEffect(()=>{
     if(user){
     dispatch(fetchItemsByUserIdAsync())
@@ -111,7 +116,8 @@ const userchecked = useSelector(selectUserChecked)
 
   return (
     <div className="App">
-       {userchecked &&<RouterProvider router={router} />}
+       {userchecked &&
+       <RouterProvider router={router} />}
     </div>
   );
 }

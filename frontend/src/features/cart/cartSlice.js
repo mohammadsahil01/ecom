@@ -74,6 +74,10 @@ export const counterSlice = createSlice({
         state.items = (action.payload);
         state.cartLoaded = true;
       })
+      .addCase(fetchItemsByUserIdAsync.rejected, (state, action) => {
+        state.status = 'idle';
+        state.cartLoaded = true;
+      })
       .addCase(updateCartAsync.pending, (state) => {
         state.status = 'loading';
       })

@@ -146,7 +146,7 @@ server.get('/logout', (req, res) => {
   // Destroy the session
 
     // Clear cookies
-    res.clearCookie('jwt='); // Replace with your actual session cookie name
+    res.clearCookie('jwt'); // Replace with your actual session cookie name
 
     // Redirect to the home page or login page
 

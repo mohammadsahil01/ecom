@@ -7,13 +7,16 @@ export default function UserOrders() {
   
   const dispatch = useDispatch();
 const orders = useSelector(selectUserOrders)
+
   useEffect(()=>{
     dispatch(fetchLoggedInUserOrdersAsync())
   },[dispatch])
 
+  const ordersReverse = [...orders].reverse()
+
   return (
     <div>
-      {orders.map((order)=> 
+      {ordersReverse.map((order)=> 
       (<div>
         <div className="mx-auto bg-white max-w-7xl px-4 mt-7 sm:px-6 lg:px-8 p-5">
          <h2 className="text-3xl mb-3 font-bold tracking-tight">Order #{order.id}</h2>
