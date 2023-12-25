@@ -10,7 +10,7 @@ import ProductDetailsPage from './pages/ProductDetailPage';
 import Protected from './features/auth/components/protetcted';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectLoggedUser } from './features/auth/authSlice';
+import { checkAuthAsync, selectLoggedUser,selectUserChecked } from './features/auth/authSlice';
 import PageNotFound from './pages/404';
 import OrderSuccessPage from './pages/order-success';
 
@@ -20,15 +20,20 @@ import AdminHome from './pages/AdminHome';
 import AdminProtected from './features/auth/components/protetctedAdmin';
 import AdminProductDetailsPage from './pages/AdminProductDetailPage';
 import ProductFormPage from './pages/ProductFormPage';
-import { fetchLoggedInUserAsync, selectUserChecked, selectUserInfo } from './features/user/userSlice';
+import { fetchLoggedInUserAsync, selectUserInfo } from './features/user/userSlice';
 import CheckoutForm from './pages/CheckoutForm';
 import StripeCheckout from './pages/StripeCheckout';
 import CartEmpty from './pages/CartEmpty';
+import LoadingPage from './pages/LoadingPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element:<Protected><Home></Home></Protected>,
+  },
+  {
+    path: "/loading",
+    element:<LoadingPage></LoadingPage>
   },
   {
     path: "/admin/home",
@@ -91,17 +96,18 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useDispatch()
-  const user  = useSelector(selectUserInfo)
+  const user  = useSelector(selectLoggedUser)
 const userchecked = useSelector(selectUserChecked)
   useEffect(()=>{
     if(!user){
-    dispatch(fetchLoggedInUserAsync())}
-  },[])
+    dispatch(checkAuthAsync())}
+  },[dispatch])
   useEffect(()=>{
     if(user){
     dispatch(fetchItemsByUserIdAsync())
+    dispatch(fetchLoggedInUserAsync());
     }
-  },[dispatch])
+  },[dispatch,user])
 
   return (
     <div className="App">

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectLoggedUser,
-  checkUserAsync,
+  loginUserAsync,
   selectErrors,
   selectSignIn,
   selectuserStatus
@@ -24,23 +24,13 @@ export default function Login() {
     formState: { errors },
   } = useForm();
  
-  const userstatus = useSelector(selectuserStatus)
+  
 
 
   return (
       <>
-      {userstatus==='loading'?<TailSpin
-            visible={true}
-            className="flex items-center justify-center h-screen"
-            height="80"
-            width="80"
-            color="#4fa94d"
-            ariaLabel="tail-spin-loading"
-            radius="1"
-            wrapperStyle={{}}
-            wrapperClass=""
-  />:null}
-      {user && <Navigate to='/' replace={true}></Navigate>}
+     
+      {user && <Navigate to='/loading' replace={true}></Navigate>}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -55,8 +45,7 @@ export default function Login() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6"  onSubmit={handleSubmit((data)=>{
-            dispatch(setUserChecked())
-            dispatch(checkUserAsync({email:data.email,password:data.password}));
+            dispatch(loginUserAsync({email:data.email,password:data.password}));
           })}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">

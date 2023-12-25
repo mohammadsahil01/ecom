@@ -2,7 +2,7 @@ import React, { useState,Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteItemsFromCartAsync, selectCartItems, selectCartLoaded, updateCartAsync } from './cartSlice';
 import { Link, Navigate } from 'react-router-dom';
-import { selectUserChecked } from '../user/userSlice';
+import { selectUserChecked } from '../auth/authSlice';
 
 
 

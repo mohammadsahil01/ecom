@@ -4,15 +4,15 @@ import { Navigate } from "react-router-dom";
 import { selectUserInfo } from "../../user/userSlice";
 
 function AdminProtected({children}) {
-    const userInfo = useSelector(selectUserInfo)
-    if(!userInfo){
+    const user = useSelector(selectLoggedUser)
+    if(!user){
         return(<Navigate to='/login' replace={true}></Navigate>)
 
     }
-    if(userInfo && userInfo.role!=='admin'){
-        return(<Navigate to='/' replace={true}></Navigate>)
+    // if(userInfo && userInfo.role!=='admin'){
+    //     return(<Navigate to='/' replace={true}></Navigate>)
 
-    }
+    // }
     return children;
 }
 

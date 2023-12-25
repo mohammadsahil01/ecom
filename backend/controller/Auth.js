@@ -31,7 +31,7 @@ exports.loginUser= async (req,res)=>{
 }
 
 exports.checkUser = async (req,res)=>{
-    res.json(SanitiziedUser(req.user))
+    res.json(req.user)
 }
 
 // exports.loginUser= async (req,res)=>{

@@ -6,11 +6,12 @@ import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon, StarIcon } from '@heroicons/react/20/solid'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { fetchAllProductsAsync, fetchBrandsAsync, fetchCategoriesAsync, fetchProductsByFiltersAsync, selectAllProducts, selectBrands, selectCategories, selectProductstatus, selectTotalItems } from '../productSlice';
 import { ITEM_PER_PAGE } from '../../../app/constants';
 import { fetchLoggedInUserAsync, selectUserChecked, selectUserInfo } from '../../user/userSlice';
 import { TailSpin } from 'react-loader-spinner';
+import { selectLoggedUser } from '../../auth/authSlice';
 
 const sortOptions = [
   { name: 'Best Rating',sort:'rating',order:'desc', current: false },
@@ -35,7 +36,8 @@ export default function ProductList() {
   const [page,setPage]=useState(1)
   const categories = useSelector(selectCategories)
   const brands = useSelector(selectBrands)
-  const user = useSelector(selectUserInfo)
+  const userInfo = useSelector(selectUserInfo)
+  const user  =  useSelector(selectLoggedUser)
   const filters = [
     {
       id: 'brand',
@@ -104,7 +106,7 @@ export default function ProductList() {
 
   return (
     <>
-    
+      {!user && <Navigate to='/login' replace={true}></Navigate>}
       <div className="bg-white">
       <div>
         {/* Mobile filter dialog */}

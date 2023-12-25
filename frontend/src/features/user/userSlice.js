@@ -100,7 +100,7 @@ export const selectUserOrders = (state) => state.user.userOrders;
 
 export const selectUserInfo = (state) => state.user.userInfo;
 
-export const selectUserChecked = (state) => state.user.userchecked;
+
 
 export const {setUserChecked} =  userSlice.actions;
 

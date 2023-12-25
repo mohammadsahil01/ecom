@@ -7,11 +7,12 @@ import { fetchLoggedInUser } from "../../user/userAPI";
 
 function Protected({children}) {
     const dispatch = useDispatch()
+    const user = useSelector(selectUserInfo)
     useEffect(()=>{
         if(!user){
         dispatch(fetchLoggedInUserAsync())}
     },[])
-    const user = useSelector(selectUserInfo)
+   
     if(!user){
         return(<Navigate to='/login' replace={true}></Navigate>)
 
