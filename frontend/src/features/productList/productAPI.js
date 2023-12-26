@@ -1,7 +1,7 @@
 // A mock function to mimic making an async request for data
 export function fetchAllProducts() {
   return new Promise(async (resolve) =>{
-    const response = await fetch("http://localhost:8080/products",{
+    const response = await fetch("/products",{
       credentials:'include',
     })
     const data = await response.json()
@@ -11,7 +11,7 @@ export function fetchAllProducts() {
 
 export function fetchProductById(id) {
   return new Promise(async (resolve) =>{
-    const response = await fetch("http://localhost:8080/products/"+id,
+    const response = await fetch("/products/"+id,
     {credentials:'include',}
     )
     const data = await response.json()
@@ -22,7 +22,7 @@ export function fetchProductById(id) {
 
 export function fetchCategories() {
   return new Promise(async (resolve) =>{
-    const response = await fetch("http://localhost:8080/categories",
+    const response = await fetch("/categories",
     {credentials:'include',})
     const data = await response.json()
     resolve({data})
@@ -31,7 +31,7 @@ export function fetchCategories() {
 
 export function fetchBrands() {
   return new Promise(async (resolve) =>{
-    const response = await fetch("http://localhost:8080/brands",{credentials:'include',})
+    const response = await fetch("/brands",{credentials:'include',})
     const data = await response.json()
     resolve({data})
 });
@@ -58,7 +58,7 @@ export function fetchProductsByFilters(filter,sort,pagination) {
   }
 
   return new Promise(async (resolve) =>{
-    const response = await fetch("http://localhost:8080/products?"+queryString,
+    const response = await fetch("/products?"+queryString,
     {credentials:'include',}
     )
     const data = await response.json()

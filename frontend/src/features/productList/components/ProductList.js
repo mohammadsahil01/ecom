@@ -437,6 +437,7 @@ function ProductGrid({products}) {
                           src={product.thumbnail}
                           alt={product.name}
                           className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                          loading='lazy'
                         />
                       </div>
                       <div className="mt-4 flex justify-between">

@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchItemsByUserIdAsync, selectCartItems } from '../cart/cartSlice';
 import { selectUserInfo } from '../user/userSlice'; 
+import myImg from './4505163.png'
 const navigation = [
   { name: 'Dashboard', link: '#',user:true },
   { name: 'Team', link: '#',user:true },
   { name: 'Admin', link: '/admin/home', admin: true }
 ]
 const userNavigation = [
-  { name: 'Profile', link: '/profile' },
-  { name: 'My Order', link: '/orders' },
+  { name: 'My Order', link: '/ordersList' },
   { name: 'Sign out', link: '/logout' },
 ]
 
@@ -91,7 +91,7 @@ export default function Navbar({children}) {
                             <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                               <span className="absolute -inset-1.5" />
                               <span className="sr-only">Open user menu</span>
-                              <img className="h-8 w-8 rounded-full" src={userInfo?.imageUrl} alt="" />
+                              <img className="h-8 w-8 rounded-full" src={myImg} alt="ff" />
                             </Menu.Button>
                           </div>
                           <Transition

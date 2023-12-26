@@ -21,17 +21,18 @@ const JwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser')
-
+const path = require('path');
 
 
 
 server.use(express.json())
-// server.use(express.static('build'))
+server.use(express.static(path.resolve(__dirname,'build')))
 server.use(cookieParser());
 
 const opts = {}
 opts.jwtFromRequest = cookieExtractor;
-opts.secretOrKey = "SECRET_KEY";
+opts.secretOrKey = process.env.JWT_SECRET_KEY;
+
 
 
 
@@ -50,7 +51,7 @@ server.use(session({
   }));
   
 server.use(passport.authenticate('session'));
-server.use(cors({origin: 'http://localhost:3000',exposedHeaders:['X-Total-Count'],credentials:true}))
+server.use(cors({exposedHeaders:['X-Total-Count'],credentials:true}))
 
 
 server.use('/products',isAuth(),ProductsRoutes.router)
@@ -144,11 +145,10 @@ server.post("/create-payment-intent", async (req, res) => {
 
 server.get('/logout', (req, res) => {
   // Destroy the session
-
     // Clear cookies
-    res.clearCookie('jwt'); // Replace with your actual session cookie name
-
-    // Redirect to the home page or login page
+    res.clearCookie('jwt', { expires: new Date(1), httpOnly: true, secure: true, sameSite: 'none' })
+    res.clearCookie('connect.sid', { expires: new Date(1), httpOnly: true, secure: true, sameSite: 'none' })
+    res.status(200).send('Logged out successfully');
 
 });
 

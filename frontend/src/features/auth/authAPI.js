@@ -3,7 +3,7 @@ import { isRejected } from "@reduxjs/toolkit";
 // A mock function to mimic making an async request for data
 export function createUser(userData) {
   return new Promise(async (resolve) =>{
-    const response = await fetch("http://localhost:8080/auth/signup",
+    const response = await fetch("/auth/signup",
     {method:'POST',
     credentials:'include',
     body:JSON.stringify(userData),
@@ -26,7 +26,7 @@ export function signOutUser() {
 export function LoginUser(loginInfo) {
 try{
   return new Promise(async (resolve,reject) =>{
-    const response = await fetch("http://localhost:8080/auth/login",
+    const response = await fetch("/auth/login",
     {method:'POST',
     credentials:'include',
     body:JSON.stringify(loginInfo),
@@ -50,7 +50,7 @@ try{
 export function checkAuth() {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch('http://localhost:8080/auth/check',
+      const response = await fetch('/auth/check',
       {
         credentials:'include',
       });

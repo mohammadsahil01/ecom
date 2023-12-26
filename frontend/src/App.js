@@ -76,7 +76,7 @@ const router = createBrowserRouter([
     element:<Protected><OrderSuccessPage></OrderSuccessPage></Protected>
   },
   {
-    path: "/orders",
+    path: "/ordersList",
     element:<Protected><UserOrderPage></UserOrderPage></Protected>
   },
   {

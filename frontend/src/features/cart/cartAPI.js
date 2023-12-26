@@ -3,7 +3,7 @@
 
 export function addToCart(item) {
   return new Promise(async (resolve) =>{
-    const response = await fetch("http://localhost:8080/cart",
+    const response = await fetch("/cart",
     {method:'POST',
     credentials:'include',
     body:JSON.stringify(item),
@@ -16,7 +16,7 @@ export function addToCart(item) {
 
 export function updateCart(update) {
   return new Promise(async (resolve) =>{
-    const response = await fetch("http://localhost:8080/cart/"+update.id,
+    const response = await fetch("/cart/"+update.id,
     {method:'PATCH',
     credentials:'include',
     body:JSON.stringify(update),
@@ -29,7 +29,7 @@ export function updateCart(update) {
 
 export function deleteItemsFromCart(itemId) {
   return new Promise(async (resolve) =>{
-    const response = await fetch("http://localhost:8080/cart/"+itemId,
+    const response = await fetch("/cart/"+itemId,
     {method:'DELETE',
     credentials:'include',
     headers:{'content-type':'application/json'}
@@ -53,7 +53,7 @@ export async function resetCart() {
 
 export function fetchProductByUserId() {
   return new Promise(async (resolve) =>{
-    const response = await fetch("http://localhost:8080/cart",{
+    const response = await fetch("/cart",{
     credentials:'include'}
    )
     const data = await response.json()
