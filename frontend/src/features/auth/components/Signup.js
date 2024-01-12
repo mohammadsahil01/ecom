@@ -41,7 +41,6 @@ export default function Signup() {
           <form className="space-y-6" onSubmit={handleSubmit((data)=>{
             dispatch(createUserAsync({email:data.email,password:data.password,Addresses:[],role:'user'}));
             dispatch(fetchLoggedInUserAsync())
-            console.log(data)
           })}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">

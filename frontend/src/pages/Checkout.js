@@ -63,7 +63,7 @@ function CheckoutPage() {
           <form onSubmit={handleSubmit((data)=>{
             setAdresses([...addresses,data])
             dispatch(updateUserAsync({Addresses:data}));
-            console.log({data})
+          
           })}>
             <div className="space-y-12 col">
        
