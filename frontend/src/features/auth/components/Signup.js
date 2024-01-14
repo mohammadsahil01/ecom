@@ -7,11 +7,12 @@ import {
 import { Link, Navigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { fetchLoggedInUserAsync } from '../../user/userSlice';
+import { TailSpin } from 'react-loader-spinner';
 
 
 export default function Signup() {
   const dispatch = useDispatch();
-  
+  const [loading,setLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -20,6 +21,8 @@ export default function Signup() {
   } = useForm();
   const user  = useSelector(selectLoggedUser)
 
+  
+
 
   return (
     <div>
@@ -27,14 +30,29 @@ export default function Signup() {
       {user && <Navigate to='/' replace={true}></Navigate>}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Create a new account
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" >
+          {loading && <TailSpin
+            visible={true}
+            className="flex items-center justify-center h-screen"
+            height="80"
+            width="80"
+            color="#4fa94d"
+            ariaLabel="tail-spin-loading"
+            radius="1"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />}
+          <form className="space-y-6" onSubmit={handleSubmit((data)=>{
+            setLoading(true)
+            dispatch(createUserAsync({email:data.email,password:data.password,Addresses:[],role:'user'}));
+            dispatch(fetchLoggedInUserAsync())
+            setLoading(false)
+          })}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
@@ -88,12 +106,6 @@ export default function Signup() {
 
             <div>
               <button
-              onClick={(e)=>{
-                e.preventDefault();
-                handleSubmit((data)=>{
-                dispatch(createUserAsync({email:data.email,password:data.password,Addresses:[],role:'user'}));
-                dispatch(fetchLoggedInUserAsync())
-              })}}
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >

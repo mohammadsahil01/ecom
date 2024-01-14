@@ -9,8 +9,8 @@ import {
 } from '../authSlice';
 import { Link, Navigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import { fetchLoggedInUserAsync, selectUserChecked, selectUserInfo,setUserChecked } from '../../user/userSlice';
 import { TailSpin } from 'react-loader-spinner';
+
 
 
 export default function Login() {
@@ -23,7 +23,7 @@ export default function Login() {
     watch,
     formState: { errors },
   } = useForm();
- 
+  const [loading,setLoading] = useState(false)
   
 
 
@@ -39,6 +39,17 @@ export default function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        {loading && <TailSpin
+            visible={true}
+            className="flex items-center justify-center h-screen"
+            height="80"
+            width="80"
+            color="#4fa94d"
+            ariaLabel="tail-spin-loading"
+            radius="1"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />}
           <form className="space-y-6"  >
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
@@ -81,9 +92,12 @@ export default function Login() {
                 type="submit"
                 onClick={(e) => {
                   e.preventDefault()
+                  setLoading(true)
                   handleSubmit((data) => {
                     dispatch(loginUserAsync({ email: data.email, password: data.password }));
-                  })();
+                  })
+                  setLoading(false)
+                  ();
                 }}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >

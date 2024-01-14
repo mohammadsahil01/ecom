@@ -245,7 +245,7 @@ function CheckoutPage() {
                     Cash
                   </label>
                 </div>
-                <div className="flex items-center gap-x-3">
+                {/* <div className="flex items-center gap-x-3">
                   <input
                     id="card"
                     name="payments"
@@ -258,7 +258,7 @@ function CheckoutPage() {
                   <label htmlFor="card" className="block text-sm font-medium leading-6 text-gray-900">
                     Card Payment
                   </label>
-                </div>
+                </div> */}
               </div>
             </fieldset>
           </div>
