@@ -26,8 +26,8 @@ export default function Cart() {
     <>
      {!items.length>0 && <Navigate to='/empty-cart' replace={true}></Navigate>}
    
-     <div className="mx-auto max-w-7xl px-4 mt-7 sm:px-6 lg:px-8">
-     <h2 className="text-3xl mb-3">Cart</h2>
+     <div className="mx-auto max-w-7xl px-4 mt-7 sm:px-6 lg:px-24">
+     <h2 className="text-3xl mb-6">Cart</h2>
                         <div className="flow-root mb-4">
                           <ul role="list" className="-my-6 divide-y divide-gray-200">
                             {items.map((item) => (
