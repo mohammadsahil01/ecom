@@ -19,7 +19,7 @@ const orders = useSelector(selectUserOrders)
       {ordersReverse.map((order)=> 
       (<div>
         <div className="mx-auto bg-white max-w-7xl px-4 mt-7 sm:px-6 lg:px-8 p-5">
-         <h2 className="text-3xl mb-3 font-bold tracking-tight">Order #{order.id}</h2>
+         <h2 className="text-2xl mb-3 font-bold tracking-tight">Order #{order.id}</h2>
          <h3 className="mt-0.5 text-sm font-bold tracking-tight ">Order status: <span className='text-red-500'>{order.status}</span></h3>
                         <div className="flow-root mb-4">
                           <ul role="list" className="-my-6 divide-y divide-gray-300 bg py-8 px-3">

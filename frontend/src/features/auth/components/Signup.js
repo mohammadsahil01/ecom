@@ -47,7 +47,8 @@ export default function Signup() {
             wrapperStyle={{}}
             wrapperClass=""
           />}
-          <form className="space-y-6" onSubmit={handleSubmit((data)=>{
+          <form className="space-y-6" onSubmit={handleSubmit((data,event)=>{
+            event.preventDefault()
             setLoading(true)
             dispatch(createUserAsync({email:data.email,password:data.password,Addresses:[],role:'user'}));
             dispatch(fetchLoggedInUserAsync())
@@ -107,6 +108,7 @@ export default function Signup() {
             <div>
               <button
                 type="submit"
+                disabled={loading}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Signup

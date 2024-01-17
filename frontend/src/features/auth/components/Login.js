@@ -4,12 +4,11 @@ import {
   selectLoggedUser,
   loginUserAsync,
   selectErrors,
-  selectSignIn,
-  selectuserStatus
 } from '../authSlice';
 import { Link, Navigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { TailSpin } from 'react-loader-spinner';
+
 
 
 
@@ -30,7 +29,7 @@ export default function Login() {
   return (
       <>
       {user && <Navigate to='/' replace={true}></Navigate>}
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center content-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -39,6 +38,7 @@ export default function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div  className='flex items-center justify-center'>
         {loading && <TailSpin
             visible={true}
             className="flex items-center justify-center h-screen"
@@ -50,7 +50,18 @@ export default function Login() {
             wrapperStyle={{}}
             wrapperClass=""
           />}
-          <form className="space-y-6"  >
+        </div>
+        
+          <form className="space-y-6 sm:ml-2" 
+             onSubmit={handleSubmit((data,event)=>{
+              event.preventDefault()
+              setLoading(true)
+              dispatch(loginUserAsync({email:data.email,password:data.password}))
+              if(user || error)
+              setLoading(false);
+             })}
+             
+            >
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
@@ -74,7 +85,7 @@ export default function Login() {
                 </label>
                 
               </div>
-              <div className="mt-2">
+              <div className="mt-2 ">
                 <input
                   id="password"
                   {...register("password",{required:'password is required' })}
@@ -90,16 +101,8 @@ export default function Login() {
             <div>
               <button
                 type="submit"
-                onClick={(e) => {
-                  e.preventDefault()
-                  setLoading(true)
-                  handleSubmit((data) => {
-                    dispatch(loginUserAsync({ email: data.email, password: data.password }));
-                  })
-                  setLoading(false)
-                  ();
-                }}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                disabled={loading}
               >
                 Login
               </button>

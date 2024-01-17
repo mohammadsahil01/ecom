@@ -351,7 +351,7 @@ function DesktopFilter({handleFilter,filters},) {
  );
 }
 
-function Pagination({handlePage,page,totalItems}) {
+export function Pagination({handlePage,page,totalItems}) {
   return ( 
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
         <div className="flex flex-1 justify-between sm:hidden">
@@ -385,7 +385,7 @@ function Pagination({handlePage,page,totalItems}) {
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
             </a>
             {Array.from({length:Math.ceil(totalItems/ITEM_PER_PAGE)}).map((el,index)=>(
-               <div
+               <div key={index}
               onClick={e=>handlePage(index+1)}
                aria-current="page"
                className={`relative z-10 inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-semibold focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
@@ -410,63 +410,67 @@ function Pagination({handlePage,page,totalItems}) {
   </div> );
 }
 
-function ProductGrid({products}) {
-  const liststatus = useSelector(selectProductstatus)
-  return ( 
-      <div className="lg:col-span-3">
-                {/*This is our product list*/}
-                <div className="bg-white">
-                  <div className="mx-auto -mt-12 max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-                
-                  <div className=" grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-                  {liststatus==='loading'?<TailSpin
-            visible={true}
-            className="flex items-center justify-center h-screen"
-            height="80"
-            width="80"
-            color="#4fa94d"
-            ariaLabel="tail-spin-loading"
-            radius="1"
-            wrapperStyle={{}}
-            wrapperClass=""
-  />:null}
-                  {products.map((product) => (
-                    
-                    <Link to={`/product-detail/${product.id}`}>
-                    <div key={product.id} className="group relative border-solid border-2 border-gray-300 p-2">
-                      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                        <img
-                          src={product.thumbnail}
-                          alt={product.name}
-                          className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                          loading='lazy'
-                        />
-                      </div>
-                      <div className="mt-4 flex justify-between">
-                        <div>
-                          <h3 className="text-sm text-gray-700">
-                            <div href={product.href}>
-                              <span aria-hidden="true" className="absolute inset-0" />
-                              {product.title}
-                            </div>
-                          </h3>
-                          <p className="mt-1 text-sm text-gray-500">
+function ProductGrid({ products }) {
+  const liststatus = useSelector(selectProductstatus);
+
+  return (
+    <div className="lg:col-span-3">
+      {/* This is our product list */}
+      <div className="bg-white">
+        <div className="mx-auto -mt-12 max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+          {liststatus === 'loading' ? (
+            <div className="flex items-center justify-center h-screen">
+              <TailSpin
+                visible={true}
+                height="80"
+                width="80"
+                color="#4fa94d"
+                ariaLabel="tail-spin-loading"
+                radius="1"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+              {products.map((product) => (
+                <Link to={`/product-detail/${product.id}`} key={product.id}>
+                  <div className="group relative border-solid border-2 border-gray-300 p-2">
+                    <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                      <img
+                        src={product.thumbnail}
+                        alt={product.name}
+                        className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="mt-4 flex justify-between">
+                      <div>
+                        <h3 className="text-sm text-gray-700">
+                          <div href={product.href}>
+                            <span aria-hidden="true" className="absolute inset-0" />
+                            {product.title}
+                          </div>
+                        </h3>
+                        <p className="mt-1 text-sm text-gray-500">
                           {product.rating}
-                            <StarIcon className='w-5 h-5 inline -mt-1.5 ml-0.5 '></StarIcon>
-                            </p>
-                        </div>
-                        <div>
+                          {/* Assuming StarIcon is a component or an SVG for rendering stars */}
+                          {/* Replace it with your actual StarIcon component */}
+                          {/* <StarIcon className="w-5 h-5 inline -mt-1.5 ml-0.5" /> */}
+                        </p>
+                      </div>
+                      <div>
                         <p className="text-sm font-medium text-gray-600">${product.price}</p>
-                        </div>
-                        
                       </div>
                     </div>
-                    </Link>
-                  ))}
-                </div>
+                  </div>
+                </Link>
+              ))}
             </div>
-              </div>
-           </div>
-   );
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
