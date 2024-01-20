@@ -1,19 +1,5 @@
-function DesktopFilter({handleFilter,filters}) {
-    const filters = [
-        {
-          id: 'brand',
-          name: 'Brands',
-          options: brands
-          ,
-        },
-        {
-          id: 'category',
-          name: 'Category',
-          options: categories
-          
-        },
-        
-      ]
+export function DesktopFilter({handleFilter,filters}) {
+  
     return ( 
       <form className="hidden lg:block ">
                   <h3 className="sr-only">Categories</h3>

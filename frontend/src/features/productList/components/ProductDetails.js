@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchProductByIdAsync, selectedProductById } from '../productSlice'
 import { useParams } from 'react-router-dom'
 import { addToCartAsync } from '../../cart/cartSlice'
+import toast, { Toaster } from 'react-hot-toast'
 
 
 function classNames(...classes) {
@@ -21,6 +22,7 @@ export default function ProductDetails() {
     e.preventDefault()
     const newItem = {Product:product.id,quantity:1}
     dispatch(addToCartAsync(newItem))
+    toast.success('Added to cart!')
   }
 
 
@@ -31,6 +33,7 @@ export default function ProductDetails() {
 
   return (
     <div  className="bg-white">
+      <div><Toaster reverseOrder={false} position="top-center"/></div>
       {product&&(<div className="pt-6">
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
           <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">

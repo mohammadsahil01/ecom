@@ -6,6 +6,7 @@ import { updateUserAsync } from "../features/user/userSlice";
 import { useEffect, useState } from "react";
 import { createOrderAsync, selectCurrentOrder } from "../features/order/orderSlice";
 import { selectUserInfo } from "../features/user/userSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 function CheckoutPage() {
   const [selectedAddress,setSelectedAddress] = useState(null)
@@ -52,6 +53,10 @@ function CheckoutPage() {
 
     return ( 
         <>
+        <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
         {!items.length>0 && <Navigate to='/' replace={true}></Navigate>}
         {currentOrder && currentOrder.paymentMethod==='cash' && <Navigate to={`/order-success/${currentOrder.id}`} replace={true}></Navigate>}
         {currentOrder && currentOrder.paymentMethod==='Card Payment' &&  <Navigate to={`/stripe-checkout/`} replace={true}></Navigate>}
@@ -63,7 +68,7 @@ function CheckoutPage() {
           <form onSubmit={handleSubmit((data)=>{
             setAdresses([...addresses,data])
             dispatch(updateUserAsync({Addresses:data}));
-          
+            toast.success("Address Added")
           })}>
             <div className="space-y-12 col">
        

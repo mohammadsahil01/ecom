@@ -104,5 +104,6 @@ export const authSlice = createSlice({
 export const selectLoggedUser = (state)=>state.auth.loggedInUserToken
 export const selectErrors = (state)=>state.auth.error;
 export const selectUserChecked = (state) => state.auth.userChecked;
+export const selectUserStatus = (state) => state.auth.status;
 
 export default authSlice.reducer;
